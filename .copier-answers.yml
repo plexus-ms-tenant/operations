@@ -1,6 +1,7 @@
 # Maintained by Copier — NEVER EDIT MANUALLY.
-_commit: 0.106.1
+_commit: 0.107.0
 _src_path: gh:plexus-ms/preset-repo-platform
+ci_strategy: forge
 github_org: plexus-ms-tenant
 infrastructure: false
 renovate_reviewers: davidjalbers
