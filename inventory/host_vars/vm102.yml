@@ -1,0 +1,5 @@
+# vm102: the one host of the tenant, a guest on the damage tenant's srv01.
+# The deploy verb reaches it through the public SSH forward of the damage
+# ingress VM (port 2102 → vm102:22), as the forge's runners sit outside the
+# overlay (§ 8 PLX-Delivery, strategy github without an overlay).
+plexus_deploy_target: ssh://plexus@51.68.107.4:2102
