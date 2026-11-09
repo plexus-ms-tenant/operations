@@ -1,6 +1,8 @@
-# The tenant's platform repo (§ 3 PLX-Tenancy): the ops side, applied by playbook
-# runs on its own occasions — it has no release cycle (§ 3 PLX-Delivery). Third-party
-# apps the tenant merely operates live under apps/<name>/ (§ 2 PLX-App).
+# The tenant's operations repo (§ 3 PLX-Tenancy): the ops side, applied by
+# playbook runs on its own occasions — it has no release cycle (§ 3 PLX-Delivery).
+# One playbook per layer, each shipped in its plexus.* collection and mounted
+# here (platform.yml); third-party apps the tenant
+# merely operates live under apps/<name>/ (§ 2 PLX-App).
 
 # Verbs are asked as `mise :verb` at the repo root like in every tenant repo
 # (§ 2 PLX-Repo); that form needs the root marker even without sub-projects.
@@ -23,7 +25,7 @@ copier = { version = "latest", uvx = true } # template management
 # plexus-ms/primitives with provenance and bumped by the update bot; the
 # trust-policy approval only waives npm's young-package heuristics.
 # The pin is the train's to write, never the update bot's (§ 1 PLX-Updates).
-"npm:@plexus-ms/cli" = { version = "0.113.0", allow_low_downloads = true }
+"npm:@plexus-ms/cli" = { version = "0.114.0", allow_low_downloads = true }
 
 [hooks]
 # Wire up Git hooks
@@ -32,42 +34,35 @@ copier = { version = "latest", uvx = true } # template management
 postinstall = "if command -v hk >/dev/null; then hk install --mise; fi"
 
 
-# Platform verbs (PLX-Platform) — the two playbooks, split by change cadence.
+# Layer verbs — one playbook per layer, arguments passed through to
+# ansible-playbook after `--`: `mise platform -- --tags apps --limit vm101`.
 
-[tasks.provision]
+[tasks.platform]
 depends = ["collections"]
-description = "Base host setup: apt, hardening, docker, caddy (fresh hosts and deep-reaching changes)"
-run = './ansible-playbookw provision.yml'
-
-[tasks.configure]
-depends = ["collections"]
-description = "Everyday pass: ingress routes, app dirs, .env, .env.secret, container re-creation"
-run = './ansible-playbookw configure.yml'
-
-
+description = "The platform layer on the app hosts (PLX-Platform): host baseline, deploy user, ingress, secrets, apps; --tags for a part"
+run = './ansible-playbookw platform.yml'
 
 # Contract verbs (§ 3 PLX-Repo) — every tenant repo answers them; the ones a
-# platform repo has no use for exist and pass as documented no-ops.
+# operations repo has no use for exist and pass as documented no-ops.
 
 [tasks.dev]
-description = "No-op: a platform repo has no development environment to start"
-run = 'echo "dev: nothing to start in a platform repo"'
+description = "No-op: an operations repo has no development environment to start"
+run = 'echo "dev: nothing to start in an operations repo"'
 
 [tasks.build]
-description = "No-op: a platform repo produces no artifact; third-party apps pin published images"
-run = 'echo "build: nothing to build in a platform repo"'
+description = "No-op: an operations repo produces no artifact; third-party apps pin published images"
+run = 'echo "build: nothing to build in an operations repo"'
 
 [tasks.check]
 depends = ["collections"]
-description = "Static checks: playbook syntax against the pinned collection"
+description = "Static checks: playbook syntax against the pinned collections"
 run = [
-    'ansible-playbook --syntax-check provision.yml',
-    'ansible-playbook --syntax-check configure.yml',
+    'ansible-playbook --syntax-check platform.yml',
 ]
 
 [tasks.test]
-description = "No-op: a platform repo has no tests that gate a deploy"
-run = 'echo "test: nothing to test in a platform repo"'
+description = "No-op: an operations repo has no tests that gate a deploy"
+run = 'echo "test: nothing to test in an operations repo"'
 
 [tasks.verify]
 description = "Perform all steps that verify code quality"
@@ -83,7 +78,7 @@ run = "copier update --trust"
 # Internal / hidden tasks
 
 [tasks.collections]
-description = "Install the pinned plexus.platform collection"
+description = "Install the pinned plexus.* collections"
 hide = true
 run = 'ansible-galaxy collection install -r requirements.yml'
 sources = ["requirements.yml"]
