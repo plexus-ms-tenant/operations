@@ -10,6 +10,10 @@ monorepo_root = true
 config_roots = ["."]
 
 [tools]
+# node: the runtime of plx and plx-ci below and nothing else (the repo has no
+# Node toolchain); pinned like every tool, since the tools' own pin says
+# nothing about the runtime they run on, and bumped by the update bot.
+node = "24"
 hk = "latest" # Git hooks
 uv = "latest" # required for ansible and copier
 ansible = { version = "latest", uvx = true } # configuration management
@@ -19,7 +23,7 @@ copier = { version = "latest", uvx = true } # template management
 # plexus-ms/primitives with provenance and bumped by the update bot; the
 # trust-policy approval only waives npm's young-package heuristics.
 # The pin is the train's to write, never the update bot's (§ 1 PLX-Updates).
-"npm:@plexus-ms/cli" = { version = "0.112.0", allow_low_downloads = true }
+"npm:@plexus-ms/cli" = { version = "0.113.0", allow_low_downloads = true }
 
 [hooks]
 # Wire up Git hooks
