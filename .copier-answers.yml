@@ -3,7 +3,7 @@ _commit: 0.113.0
 _src_path: gh:plexus-ms/preset-repo-platform
 ci_overlay: none
 ci_registry: ghcr
-ci_strategy: forge
+ci_strategy: github
 github_org: plexus-ms-tenant
 infrastructure: false
 renovate_reviewers: davidjalbers
