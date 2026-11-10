@@ -5,7 +5,7 @@
 plexus_deploy_target: ssh://plexus@51.68.107.4:2102
 
 # Apps on this host (§ 3 PLX-Platform); the record shape is documented in
-# group_vars/plexus.yml.
+# group_vars/platform.yml.
 plexus_apps:
   - name: website
     repo: plexus-ms-tenant/web
