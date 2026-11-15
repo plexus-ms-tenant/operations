@@ -25,7 +25,7 @@ copier = { version = "latest", uvx = true } # template management
 # plexus-ms/tooling at the Plexus version, with provenance; the
 # trust-policy approval only waives npm's young-package heuristics.
 # The pin is written with each version, never by the update bot (§ 1 PLX-Updates).
-"npm:@plexus-ms/cli" = { version = "0.120.0", allow_low_downloads = true }
+"npm:@plexus-ms/cli" = { version = "0.121.0", allow_low_downloads = true }
 
 [hooks]
 # Wire up Git hooks
