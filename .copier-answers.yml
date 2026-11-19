@@ -1,5 +1,5 @@
 # Maintained by Copier — NEVER EDIT MANUALLY.
-_commit: 0.121.0
+_commit: 0.123.0
 _src_path: gh:plexus-ms/template-repo-operations
 ci_overlay: none
 ci_registry: ghcr
@@ -9,4 +9,3 @@ infrastructure: false
 renovate_reviewers: davidjalbers
 tenant: plexus
 update_max_age: 30
-

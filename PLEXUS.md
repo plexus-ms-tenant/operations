@@ -1,6 +1,4 @@
 ---
-plexus: 0.121.0
-modules: [PLX-Repo, PLX-Tenancy, PLX-Platform, PLX-Ingress, PLX-Secrets, PLX-Updates]
 ---
 
 - The platform host (vm102) is a guest on the damage tenant's hypervisor, and its VM backups are taken there, by the damage tenant's backup server and with its key, in a namespace of their own.
