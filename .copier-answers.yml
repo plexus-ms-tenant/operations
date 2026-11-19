@@ -8,4 +8,4 @@ github_org: plexus-ms-tenant
 infrastructure: false
 renovate_reviewers: davidjalbers
 tenant: plexus
-update_max_age: 30
+update_max_age: 7
