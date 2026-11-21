@@ -8,18 +8,15 @@ monorepo_root = true
 config_roots = ["."]
 
 [tools]
-# The runtime of plx and plx-ci below and nothing else: the tools' own pins say nothing about it.
 node = "24"
 hk = "latest"
-# mise's Python keeps the uv tools' environments inside the cached data directory; it must satisfy
-# every uv tool's Python requirement, and after changing it reinstall them (`mise install -f <tool>`).
 python = "3.14"
 uv = "latest"
 ansible = { version = "latest", uvx = true }
 copier = { version = "latest", uvx = true }
 # The plx pins are written with each Plexus version, never by the update bot (§ 1 PLX-Updates);
 # allow_low_downloads only waives npm's young-package heuristics.
-"npm:@plexus-ms/cli" = { version = "0.124.0", allow_low_downloads = true }
+"npm:@plexus-ms/cli" = { version = "0.128.0", allow_low_downloads = true }
 
 [hooks]
 # hk is absent on a CI runner whose mise installs only the tools a job names.
