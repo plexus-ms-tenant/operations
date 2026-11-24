@@ -16,7 +16,7 @@ ansible = { version = "latest", uvx = true }
 copier = { version = "latest", uvx = true }
 # The plx pins are written with each Plexus version, never by the update bot (§ 1 PLX-Updates);
 # allow_low_downloads only waives npm's young-package heuristics.
-"npm:@plexus-ms/cli" = { version = "0.129.0", allow_low_downloads = true }
+"npm:@plexus-ms/cli" = { version = "0.129.1", allow_low_downloads = true }
 
 [hooks]
 # hk is absent on a CI runner whose mise installs only the tools a job names.
